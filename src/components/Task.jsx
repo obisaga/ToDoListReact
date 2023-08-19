@@ -46,6 +46,11 @@ const Task = () => {
         )
     }
 
+    const handleEdit = (id, text) => {
+        setEditing(id)
+        setEditingText(text)
+    }
+
     return (
         <div>
             <div>
@@ -73,7 +78,7 @@ const Task = () => {
                             (
                                 <div>
                                 <p>{newTask.taskName}</p>
-                                <button onClick={() => setEditing(newTask.id, newTask.id)}>EDIT</button>
+                                <button onClick={() => handleEdit(newTask.id, newTask.taskName)}>EDIT</button>
                                 </div>
                             )
                             }
