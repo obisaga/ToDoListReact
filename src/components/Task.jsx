@@ -6,22 +6,23 @@ const Task = () => {
     const [taskList, setTaskList] = useState([]);
     const [editing, setEditing] = useState(null)
     const [editingText, setEditingText] = useState("")
+    const [items, setItems] = useState([])
     
 
     useEffect(() => {
-        const getList = localStorage.getItem("loadList")
-        const loadedList  = JSON.parse(getList)
+        const retrievedList = localStorage.getItem("items")
+        const loadedList  = JSON.parse(retrievedList)
 
         if(loadedList){
-            setTaskList(loadedList)
+            setItems(loadedList)
         }
     }, [])
 
     
     useEffect(() => {
-        const storage = JSON.stringify(taskList)
-        localStorage.setItem("loadList", storage)
-    }, [taskList])
+        const storedList = JSON.stringify(items)
+        localStorage.setItem("items", storedList)
+    }, [items])
 
 
 
