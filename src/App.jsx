@@ -8,8 +8,6 @@ function App() {
   return (
     <>
       <div className="list">
-      {/* {taskList.map((task) =>
-        <Task />)} */}
         <Task />
       </div>    
     </>
