@@ -1,11 +1,27 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const Task = () => {
     const [newTask, setNewTask] = useState("");
     const [taskList, setTaskList] = useState([]);
     const [editing, setEditing] = useState(null)
     const [editingText, setEditingText] = useState("")
+    
+
+    useEffect(() => {
+        const getList = localStorage.getItem("loadList")
+        const loadedList  = JSON.parse(getList)
+
+        if(loadedList){
+            setTaskList(loadedList)
+        }
+    }, [])
+
+    
+    useEffect(() => {
+        const storage = JSON.stringify(taskList)
+        localStorage.setItem("loadList", storage)
+    }, [taskList])
 
 
 
@@ -83,10 +99,10 @@ const Task = () => {
                             )
                             }
 
-                        <input
+                        {/* <input
                             type="checkbox"
                             onClick={() => completeTask(newTask.id)}
-                            checked={newTask.completed}/>
+                            checked={newTask.completed}/> */}
 
                         <button onClick={() => deleteTask(newTask.id)}>DELETE</button>
                         </div>
