@@ -25,7 +25,7 @@ const Task = () => {
     const editTask = (id) => {
         const updatedTask = [...taskList].map((newTask) => {
             if (newTask.id === id) {
-                newTask = editingText
+                newTask.taskName = editingText
             }
             return newTask
         })
@@ -54,42 +54,43 @@ const Task = () => {
             </div>
             <div>
                 <h2>Task</h2>
-                {/* {taskList.map((newTask, index) => 
-                {
-                    return(
-                        <input type="text" onChange={(e) => setEditingText(e.target.value)} value={editingText}/>
-                    )
-                }              
-                )} */}
 
                 {taskList.map((newTask, index) => {
-                    return ( <input type="text" onChange={(e) => setEditingText(e.target.value)} value={editingText}/>
+                    return (                                            
+                        <div key={index}>
 
                             {editing === newTask.id ? 
-                            (<input
+                            (
+                                <div>
+                                <input
                                 type="text"
                                 onChange={(e) => setEditingText(e.target.value)}
                                 value={editingText} /> 
-                                <button onClick={() => editTask(newTask.id)}>SAVE EDIT</button>) : 
-                                (<p>{newTask.taskName}</p>
-                                <button onClick={() => setEditing(newTask.id, newTask.id)}>EDIT</button>)
+                                <button onClick={() => editTask(newTask.id)}>SAVE EDIT</button>
+                                </div>
+                            )
+                            :
+                            (
+                                <div>
+                                <p>{newTask.taskName}</p>
+                                <button onClick={() => setEditing(newTask.id, newTask.id)}>EDIT</button>
+                                </div>
+                            )
                             }
-                                
-                             
-                         </div>
-                                type="checkbox"
-                                onClick={() => completeTask(newTask.id)}
-                                checked={newTask.completed}/>
 
-                                    ton onClick={() => deleteTask(newTask.id)}>DELETE</button>
+                        <input
+                            type="checkbox"
+                            onClick={() => completeTask(newTask.id)}
+                            checked={newTask.completed}/>
 
-
+                        <button onClick={() => deleteTask(newTask.id)}>DELETE</button>
+                        </div>
                     )
-                }
-                )}
-            </div>
-        </div>
-    )
-}
+                } ) }
+
+                    </div>
+                </div>)
+    }
+         
 
 export default Task
