@@ -1,15 +1,12 @@
-import './App.css'
-import Task from './components/Task';
-
+import './App.css';
+import TodoList from './pages/TodoList';
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 function App() {
- 
 
   return (
     <>
-      <div className="list">
-        <Task />
-      </div>    
+      <TodoList />
     </>
   )
 }

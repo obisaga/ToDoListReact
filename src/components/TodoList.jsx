@@ -1,12 +1,15 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
 
-const Task = () => {
+
+
+const TodoList = () => {
     const [newTask, setNewTask] = useState("");
     const [taskList, setTaskList] = useState([]);
     const [editing, setEditing] = useState(null)
     const [editingText, setEditingText] = useState("")
-    
     
 
     useEffect(() => {
@@ -16,8 +19,6 @@ const Task = () => {
         if(loadedList){
             setTaskList(loadedList)
         }
-
-        console.log(loadedList)
     }, [])
 
     
@@ -72,17 +73,17 @@ const Task = () => {
 
     return (
         <div>
-            <div>
+            <div className="form">
                 <input onChange={(e) => setNewTask(e.target.value)} placeholder="Type something..." value={newTask}/>
-                <button onClick={addTask}>ADD</button>
+                <Button variant="dark" onClick={addTask}>ADD</Button>
             </div>
             <div>
-                <h2>Task</h2>
+                <h2>Tasks for Today:</h2>
 
                 {taskList.map((newTask, index) => {
                     return (                                            
-                        <div key={index}>
-
+                        <div className="list" key={index}>
+                                <Card class="buttonschild">
                             {editing === newTask.id ? 
                             (
                                 <div>
@@ -90,14 +91,14 @@ const Task = () => {
                                 type="text"
                                 onChange={(e) => setEditingText(e.target.value)}
                                 value={editingText} /> 
-                                <button onClick={() => editTask(newTask.id)}>SAVE EDIT</button>
+                                <Button className="saveed"variant="light" onClick={() => editTask(newTask.id)}>SAVE EDIT</Button>
                                 </div>
                             )
                             :
                             (
                                 <div>
                                 <p>{newTask.taskName}</p>
-                                <button onClick={() => handleEdit(newTask.id, newTask.taskName)}>EDIT</button>
+                                <Button className="ed"variant="light" onClick={() => handleEdit(newTask.id, newTask.taskName)}>EDIT</Button>
                                 </div>
                             )
                             }
@@ -107,7 +108,11 @@ const Task = () => {
                             onClick={() => completeTask(newTask.id)}
                             checked={newTask.completed}/> */}
 
-                        <button onClick={() => deleteTask(newTask.id)}>DELETE</button>
+<div>
+                        <Button className="del" variant="danger" onClick={() => deleteTask(newTask.id)}>DELETE</Button>
+                        </div>
+                        
+                        </Card>
                         </div>
                     )
                 } ) }
@@ -117,4 +122,4 @@ const Task = () => {
     }
          
 
-export default Task
+export default TodoList
